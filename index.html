@@ -203,6 +203,7 @@
   .gallery-item img{
     width:100%;height:240px;object-fit:cover;
     transition:transform 0.4s;
+    cursor:zoom-in;
   }
   .gallery-item:hover img{transform:scale(1.04);}
   .gallery-caption{
@@ -213,6 +214,38 @@
   .gallery-caption strong{
     display:block;color:var(--text);font-family:var(--serif);font-size:0.95rem;font-weight:600;
   }
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed;inset:0;
+    background:rgba(20,18,24,0.92);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:1000;
+    padding:2rem;
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:90vw;max-height:90vh;
+    object-fit:contain;
+    border-radius:4px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+    cursor:default;
+  }
+  .lightbox-close{
+    position:absolute;top:1.2rem;right:1.5rem;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.08);
+    color:#fff;
+    font-size:1.4rem;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:all 0.25s;
+  }
+  .lightbox-close:hover{background:var(--accent);border-color:var(--accent);}
 
   /* HORIZONTAL SCROLL GALLERY */
   .scroll-wrap{position:relative;}
@@ -229,7 +262,7 @@
   .gallery-scroll .gallery-item{
     flex:0 0 240px;
   }
-  .gallery-scroll .gallery-item img{height:260px;}
+  .gallery-scroll .gallery-item img{height:260px;cursor:zoom-in;}
   .scroll-btn{
     position:absolute;top:40%;
     width:38px;height:38px;
@@ -589,8 +622,36 @@
   <p>&copy; 2026 Dreamscapes Art Studio, New Delhi.</p>
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <script>
-  // Mobile nav toggle
+  // Lightbox for gallery images
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+  }
+
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeLightbox();
+  });
   document.getElementById('menuToggle').addEventListener('click', function(){
     document.getElementById('navMenu').classList.toggle('open');
   });
