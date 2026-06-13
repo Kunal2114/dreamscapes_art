@@ -26,8 +26,21 @@
   a{color:inherit;text-decoration:none;}
   img{display:block;max-width:100%;}
 
-  header{
+  .top-bar{
     position:fixed;top:0;left:0;right:0;
+    display:flex;justify-content:center;
+    background:var(--text);
+    color:var(--bg);
+    font-size:0.78rem;
+    letter-spacing:1px;
+    padding:0.4rem 6%;
+    z-index:101;
+  }
+  .top-bar a{color:var(--bg);}
+  .top-bar a:hover{color:var(--accent);}
+
+  header{
+    position:fixed;top:32px;left:0;right:0;
     display:flex;justify-content:space-between;align-items:center;
     padding:0.9rem 6%;
     background:rgba(251,249,246,0.92);
@@ -59,7 +72,7 @@
     min-height:80vh;
     display:flex;flex-direction:column;justify-content:center;align-items:center;
     text-align:center;
-    padding:7rem 6% 4rem;
+    padding:8.5rem 6% 4rem;
   }
   .hero-logo{
     width:96px;height:96px;
@@ -323,7 +336,7 @@
 
   @media(max-width:768px){
     nav ul{
-      position:absolute;top:100%;left:0;right:0;
+      position:fixed;top:80px;left:0;right:0;
       flex-direction:column;background:var(--bg);
       padding:1.5rem;gap:1rem;display:none;text-align:center;
       border-bottom:1px solid var(--line);
@@ -337,6 +350,9 @@
 </head>
 <body>
 
+<div class="top-bar">
+  <span>Quick connect: <a href="mailto:shiprarani23@gmail.com">shiprarani23@gmail.com</a></span>
+</div>
 <header>
   <div class="logo">
     <img src="assets/logo.png" alt="Dreamscapes Art Studio logo">
@@ -396,19 +412,23 @@
     <h2 class="section-title">Works on paper &amp; canvas</h2>
     <p class="section-sub">Watercolour and mixed media pieces exploring landscapes, interiors, and quiet moments.</p>
   </div>
-  <div class="gallery">
-    <div class="gallery-item">
-      <img src="assets/paintings1.png" alt="Landscape watercolour painting">
-      <div class="gallery-caption"><strong>Landscape</strong>Watercolour on paper, 12 x 16 in</div>
+  <div class="scroll-wrap">
+    <button class="scroll-btn left" data-target="workScroll" aria-label="Scroll left">&#8249;</button>
+    <div class="gallery-scroll" id="workScroll">
+      <div class="gallery-item">
+        <img src="assets/paintings1.png" alt="Landscape watercolour painting">
+        <div class="gallery-caption"><strong>Landscape</strong>Watercolour on paper, 12 x 16 in</div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/paintings2.png" alt="Mixed media figure painting">
+        <div class="gallery-caption"><strong>Reflections</strong>Oil / mixed media on canvas</div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/paintings3.png" alt="Cityscape watercolour painting">
+        <div class="gallery-caption"><strong>Cityscape</strong>Watercolour on paper, 12 x 16 in</div>
+      </div>
     </div>
-    <div class="gallery-item">
-      <img src="assets/paintings2.png" alt="Mixed media figure painting">
-      <div class="gallery-caption"><strong>Reflections</strong>Oil / mixed media on canvas</div>
-    </div>
-    <div class="gallery-item">
-      <img src="assets/paintings3.png" alt="Cityscape watercolour painting">
-      <div class="gallery-caption"><strong>Cityscape</strong>Watercolour on paper, 12 x 16 in</div>
-    </div>
+    <button class="scroll-btn right" data-target="workScroll" aria-label="Scroll right">&#8250;</button>
   </div>
 </section>
 
@@ -417,15 +437,19 @@
     <p class="eyebrow">Wood carving</p>
     <h2 class="section-title">Traditional craftsmanship</h2>
   </div>
-  <div class="gallery">
-    <div class="gallery-item">
-      <img src="assets/wood_carving1.png" alt="Wood carving detail">
-      <div class="gallery-caption"><strong>Carved moulding</strong>Hand-carved panel detail</div>
+  <div class="scroll-wrap">
+    <button class="scroll-btn left" data-target="woodScroll" aria-label="Scroll left">&#8249;</button>
+    <div class="gallery-scroll" id="woodScroll">
+      <div class="gallery-item">
+        <img src="assets/wood_carving1.png" alt="Wood carving detail">
+        <div class="gallery-caption"><strong>Carved moulding</strong>Hand-carved panel detail</div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/wood_carving2.png" alt="Wood carving work in progress">
+        <div class="gallery-caption"><strong>Work in progress</strong>Studio carving process</div>
+      </div>
     </div>
-    <div class="gallery-item">
-      <img src="assets/wood_carving2.png" alt="Wood carving work in progress">
-      <div class="gallery-caption"><strong>Work in progress</strong>Studio carving process</div>
-    </div>
+    <button class="scroll-btn right" data-target="woodScroll" aria-label="Scroll right">&#8250;</button>
   </div>
 </section>
 
@@ -435,7 +459,7 @@
     <h2 class="section-title">Cast in metal, shaped by hand</h2>
   </div>
   <div class="scroll-wrap">
-    <button class="scroll-btn left" id="sculptLeft" aria-label="Scroll left">&#8249;</button>
+    <button class="scroll-btn left" data-target="sculptScroll" aria-label="Scroll left">&#8249;</button>
     <div class="gallery-scroll" id="sculptScroll">
       <div class="gallery-item">
         <img src="assets/bird_fist.png" alt="Bird on fist metal casting sculpture">
@@ -462,7 +486,7 @@
         <div class="gallery-caption"><strong>Winged form</strong>Metal casting</div>
       </div>
     </div>
-    <button class="scroll-btn right" id="sculptRight" aria-label="Scroll right">&#8250;</button>
+    <button class="scroll-btn right" data-target="sculptScroll" aria-label="Scroll right">&#8250;</button>
   </div>
 </section>
 
@@ -474,10 +498,14 @@
     <h2 class="section-title">Leh Palace, NBCC</h2>
     <p class="section-sub">Bharat Vandana Park, Dwarka</p>
   </div>
-  <div class="gallery">
-    <div class="gallery-item"><img src="assets/leh_project1.png" alt="Leh Palace replica project view 1"></div>
-    <div class="gallery-item"><img src="assets/leh_project2.png" alt="Leh Palace replica project view 2"></div>
-    <div class="gallery-item"><img src="assets/leh_project3.png" alt="Leh Palace replica project view 3"></div>
+  <div class="scroll-wrap">
+    <button class="scroll-btn left" data-target="projScroll" aria-label="Scroll left">&#8249;</button>
+    <div class="gallery-scroll" id="projScroll">
+      <div class="gallery-item"><img src="assets/leh_project1.png" alt="Leh Palace replica project view 1"></div>
+      <div class="gallery-item"><img src="assets/leh_project2.png" alt="Leh Palace replica project view 2"></div>
+      <div class="gallery-item"><img src="assets/leh_project3.png" alt="Leh Palace replica project view 3"></div>
+    </div>
+    <button class="scroll-btn right" data-target="projScroll" aria-label="Scroll right">&#8250;</button>
   </div>
 </section>
 
@@ -487,10 +515,14 @@
     <h2 class="section-title">Community &amp; collaboration</h2>
   </div>
   <p class="mural-text">A mural painting collaboration with the resident community of Sunder Nagri — built on the theme of Delhi heatwave workers and community stories, raising environmental awareness in partnership with Greenpeace India.</p>
-  <div class="gallery">
-    <div class="gallery-item"><img src="assets/mural_poster.png" alt="Mural inauguration poster"></div>
-    <div class="gallery-item"><img src="assets/community_work.png" alt="Community mural artwork"></div>
-    <div class="gallery-item"><img src="assets/greenpeace_post.png" alt="Greenpeace social media post about the mural"></div>
+  <div class="scroll-wrap">
+    <button class="scroll-btn left" data-target="muralScroll" aria-label="Scroll left">&#8249;</button>
+    <div class="gallery-scroll" id="muralScroll">
+      <div class="gallery-item"><img src="assets/mural_poster.png" alt="Mural inauguration poster"></div>
+      <div class="gallery-item"><img src="assets/community_work.png" alt="Community mural artwork"></div>
+      <div class="gallery-item"><img src="assets/greenpeace_post.png" alt="Greenpeace social media post about the mural"></div>
+    </div>
+    <button class="scroll-btn right" data-target="muralScroll" aria-label="Scroll right">&#8250;</button>
   </div>
 </section>
 
@@ -563,13 +595,20 @@
     document.getElementById('navMenu').classList.toggle('open');
   });
 
-  // Horizontal scroll buttons for sculpture section
-  const sculptScroll = document.getElementById('sculptScroll');
-  document.getElementById('sculptLeft').addEventListener('click', () => {
-    sculptScroll.scrollBy({left: -280, behavior:'smooth'});
+  // Horizontal scroll buttons (generic, data-target based)
+  document.querySelectorAll('.scroll-btn').forEach(btn => {
+    const target = document.getElementById(btn.dataset.target);
+    const dir = btn.classList.contains('left') ? -1 : 1;
+    btn.addEventListener('click', () => {
+      target.scrollBy({left: dir * 280, behavior:'smooth'});
+    });
   });
-  document.getElementById('sculptRight').addEventListener('click', () => {
-    sculptScroll.scrollBy({left: 280, behavior:'smooth'});
+
+  // Close mobile menu when any nav link is clicked
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navMenu').classList.remove('open');
+    });
   });
 
   // Collapsible contact form
